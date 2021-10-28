@@ -11,17 +11,18 @@ import com.github.kadehar.innopolis_online_cinema.databinding.FragmentMovieCardB
 import com.github.kadehar.innopolis_online_cinema.domain.model.Movie
 
 class MovieCardFragment : Fragment() {
+    companion object {
+        private const val MOVIE_KEY = "movie"
+        fun newInstance(movie: Movie) = MovieCardFragment().apply {
+            arguments = bundleOf(Pair(MOVIE_KEY, movie))
+        }
+    }
+
     private var _binding: FragmentMovieCardBinding? = null
     private val binding get() = _binding!!
 
     private val currMovie: Movie by lazy {
-        requireArguments().getParcelable("movie")!!
-    }
-
-    companion object {
-        fun newInstance(movie: Movie) = MovieCardFragment().apply {
-            arguments = bundleOf(Pair("movie", movie))
-        }
+        requireArguments().getParcelable(MOVIE_KEY)!!
     }
 
     override fun onCreateView(
