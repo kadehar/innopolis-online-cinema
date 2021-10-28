@@ -8,8 +8,10 @@ import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.kadehar.innopolis_online_cinema.R
 import com.github.kadehar.innopolis_online_cinema.databinding.FragmentMoviesListBinding
 import com.github.kadehar.innopolis_online_cinema.features.films_screen.ui.adapter.MoviesAdapter
+import com.github.kadehar.innopolis_online_cinema.features.movie_card.ui.MovieCardFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListFragment : Fragment() {
@@ -18,7 +20,9 @@ class MoviesListFragment : Fragment() {
 
     private val moviesViewModel by viewModel<MoviesViewModel>()
     private val moviesAdapter: MoviesAdapter by lazy {
-        MoviesAdapter(movies = emptyList())
+        MoviesAdapter(movies = emptyList()) { movie ->
+            moviesViewModel.processUiEvent(UiEvent.OnPosterClick(movie))
+        }
     }
 
     override fun onCreateView(
@@ -43,6 +47,7 @@ class MoviesListFragment : Fragment() {
         }
 
         moviesViewModel.viewState.observe(viewLifecycleOwner, ::render)
+        moviesViewModel.singleLiveEvent.observe(viewLifecycleOwner, ::onSingleEvent)
     }
 
     override fun onDestroyView() {
@@ -53,5 +58,16 @@ class MoviesListFragment : Fragment() {
     private fun render(viewState: ViewState) {
         binding.pbMovies.isGone = !viewState.isLoading
         moviesAdapter.updateList(viewState.movies)
+    }
+
+    private fun onSingleEvent(event: SingleEvent) {
+        when (event) {
+            is SingleEvent.OpenMovieCard -> {
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.moviesContainer, MovieCardFragment())
+                    .addToBackStack("movies")
+                    .commit()
+            }
+        }
     }
 }

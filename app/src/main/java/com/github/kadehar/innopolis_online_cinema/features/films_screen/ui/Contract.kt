@@ -14,10 +14,15 @@ data class ViewState(
 
 sealed class UiEvent : Event {
     object FetchMovies : UiEvent()
+    data class OnPosterClick(val movie: Movie) : UiEvent()
 }
 
 sealed class DataEvent : Event {
     object OnFetching : DataEvent()
     data class SuccessMoviesRequest(val movies: List<Movie>) : DataEvent()
     data class ErrorMoviesRequest(val errorMessage: String) : DataEvent()
+}
+
+sealed class SingleEvent : Event {
+    data class OpenMovieCard(val movie: Movie) : SingleEvent()
 }
