@@ -2,10 +2,12 @@ package com.github.kadehar.innopolis_online_cinema.features.films_screen.ui
 
 import com.github.kadehar.innopolis_online_cinema.base.BaseViewModel
 import com.github.kadehar.innopolis_online_cinema.base.Event
+import com.github.kadehar.innopolis_online_cinema.base.SingleLiveEvent
 import com.github.kadehar.innopolis_online_cinema.domain.MoviesInteractor
 
 class MoviesViewModel(private val moviesInteractor: MoviesInteractor) :
     BaseViewModel<ViewState>() {
+    val singleLiveEvent = SingleLiveEvent<SingleEvent>()
 
     init {
         processUiEvent(UiEvent.FetchMovies)
@@ -13,7 +15,6 @@ class MoviesViewModel(private val moviesInteractor: MoviesInteractor) :
 
     override fun initialViewState(): ViewState = ViewState(
         movies = emptyList(),
-        movie = null,
         errorMessage = null,
         isLoading = false
     )
@@ -34,6 +35,9 @@ class MoviesViewModel(private val moviesInteractor: MoviesInteractor) :
                         )
                     }
                 )
+            }
+            is UiEvent.OnPosterClick -> {
+                singleLiveEvent.value = SingleEvent.OpenMovieCard(event.movie)
             }
             is DataEvent.OnFetching -> {
                 return previousState.copy(isLoading = !previousState.isLoading)
