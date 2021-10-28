@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">innopolis-online-cinema</string>
+    <string name="app_name">Online Cinema</string>
+    <string name="movieContentDescription">Poster</string>
 </resources>
