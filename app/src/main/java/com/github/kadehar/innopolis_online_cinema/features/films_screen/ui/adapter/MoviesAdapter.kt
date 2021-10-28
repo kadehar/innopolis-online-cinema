@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.kadehar.innopolis_online_cinema.R
+import com.github.kadehar.innopolis_online_cinema.base.loadImage
 import com.github.kadehar.innopolis_online_cinema.base.setThrottledClickListener
 import com.github.kadehar.innopolis_online_cinema.databinding.MovieItemBinding
 import com.github.kadehar.innopolis_online_cinema.domain.model.Movie
@@ -36,14 +37,11 @@ class MoviesAdapter(
     inner class MoviesViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
-            Glide.with(itemView)
-                .load(movie.posterPath)
-                .placeholder(R.drawable.ic_placeholder)
-                .error(R.drawable.ic_image_not_found)
-                .into(binding.moviePoster)
-
-            binding.moviePoster.setThrottledClickListener {
-                onItemClick(movie)
+            binding.moviePoster.apply {
+                loadImage(movie.posterPath)
+                setThrottledClickListener {
+                    onItemClick(movie)
+                }
             }
         }
     }
