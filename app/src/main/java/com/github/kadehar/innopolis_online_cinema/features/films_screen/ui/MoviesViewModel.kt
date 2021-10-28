@@ -15,7 +15,6 @@ class MoviesViewModel(private val moviesInteractor: MoviesInteractor) :
 
     override fun initialViewState(): ViewState = ViewState(
         movies = emptyList(),
-        movie = null,
         errorMessage = null,
         isLoading = false
     )
@@ -39,7 +38,6 @@ class MoviesViewModel(private val moviesInteractor: MoviesInteractor) :
             }
             is UiEvent.OnPosterClick -> {
                 singleLiveEvent.value = SingleEvent.OpenMovieCard(event.movie)
-                return previousState.copy(movie = event.movie)
             }
             is DataEvent.OnFetching -> {
                 return previousState.copy(isLoading = !previousState.isLoading)

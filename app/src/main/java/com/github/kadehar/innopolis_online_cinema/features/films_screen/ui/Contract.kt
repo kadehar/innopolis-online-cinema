@@ -5,7 +5,6 @@ import com.github.kadehar.innopolis_online_cinema.domain.model.Movie
 
 data class ViewState(
     val movies: List<Movie>,
-    val movie: Movie?,
     val errorMessage: String?,
     val isLoading: Boolean
 ) {
