@@ -2,6 +2,8 @@ package com.github.kadehar.innopolis_online_cinema.base
 
 import android.content.Context
 import com.github.kadehar.innopolis_online_cinema.base.consts.Constants
+import com.github.kadehar.innopolis_online_cinema.domain.model.Movie
+import com.github.kadehar.innopolis_online_cinema.domain.model.MovieGenre
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,6 +26,10 @@ fun formatDate(date: String): String {
     } catch (e: ParseException) {
         date
     }
+}
+
+fun genresToString(genres: List<MovieGenre>): String {
+    return genres.joinToString() { genre -> genre.name }
 }
 
 fun httpCache10Mb(context: Context): Cache = Cache(
