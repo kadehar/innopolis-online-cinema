@@ -64,6 +64,12 @@ class MoviesListFragment : Fragment() {
         when (event) {
             is SingleEvent.OpenMovieCard -> {
                 parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                    )
                     .add(R.id.moviesContainer, MovieCardFragment.newInstance(event.movie))
                     .addToBackStack("movies")
                     .commit()
