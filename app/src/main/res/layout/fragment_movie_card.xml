@@ -56,7 +56,7 @@
                 android:id="@+id/cardMovieTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
+                android:gravity="start|clip_horizontal"
                 android:textAppearance="@style/H3Heading"
                 android:textColor="?attr/colorAccented"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,15 +67,13 @@
 
             <TextView
                 android:id="@+id/cardMovieVotes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/H3Heading"
                 android:textColor="?attr/colorAccented"
-                app:layout_constraintBaseline_toBaselineOf="@+id/cardMovieTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
-                app:layout_constraintStart_toEndOf="@+id/cardMovieTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardMovieTitle"
                 tools:text="8.5" />
 
             <TextView
@@ -85,7 +83,7 @@
                 android:textAlignment="textStart"
                 android:textAppearance="@style/Subtitle1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardMovieTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cardMovieVotes"
                 tools:text="2021" />
 
             <TextView
@@ -98,7 +96,7 @@
                 android:textAppearance="@style/Subtitle1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/cardMovieReleaseDate"
                 app:layout_constraintStart_toEndOf="@+id/cardMovieReleaseDate"
-                app:layout_constraintTop_toBottomOf="@+id/cardMovieTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cardMovieVotes"
                 tools:text="comedy, drama, horror" />
 
             <TextView
@@ -111,25 +109,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardMovieReleaseDate"
                 tools:text="Very long description to show how much we can save space" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/cardMoviePlayButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:layout_marginTop="32dp"
-                android:contentDescription="@string/watch_movie_button"
-                android:text="@string/watch_movie_button"
-                android:textAppearance="@style/Subtitle1"
-                android:textColor="?attr/colorAccented"
-                app:icon="@drawable/ic_play_movie"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardMovieOverview" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/cardMoviePlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/watch_movie_button"
+        android:text="@string/watch_movie_button"
+        android:textAppearance="@style/Subtitle1"
+        android:textColor="?attr/colorAccented"
+        app:icon="@drawable/ic_play_movie" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
