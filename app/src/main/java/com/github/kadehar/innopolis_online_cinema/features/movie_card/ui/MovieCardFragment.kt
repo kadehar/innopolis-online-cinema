@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.github.kadehar.innopolis_online_cinema.R
 import com.github.kadehar.innopolis_online_cinema.base.formatDate
 import com.github.kadehar.innopolis_online_cinema.base.genresToString
 import com.github.kadehar.innopolis_online_cinema.base.loadImage
 import com.github.kadehar.innopolis_online_cinema.databinding.FragmentMovieCardBinding
 import com.github.kadehar.innopolis_online_cinema.domain.model.Movie
+import com.github.kadehar.innopolis_online_cinema.features.video_player.ui.VideoPlayerFragment
 
 class MovieCardFragment : Fragment() {
     companion object {
@@ -46,6 +48,12 @@ class MovieCardFragment : Fragment() {
             cardMovieReleaseDate.text = formatDate(movie.releaseDate)
             cardMovieGenres.text = genresToString(movie.genres)
             cardMovieOverview.text = movie.overview
+            cardMoviePlayButton.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.moviesContainer, VideoPlayerFragment())
+                    .addToBackStack("movies")
+                    .commit()
+            }
         }
     }
 }
