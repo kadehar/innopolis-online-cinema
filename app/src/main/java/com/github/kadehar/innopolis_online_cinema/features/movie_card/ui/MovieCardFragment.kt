@@ -50,6 +50,12 @@ class MovieCardFragment : Fragment() {
             cardMovieOverview.text = movie.overview
             cardMoviePlayButton.setOnClickListener {
                 parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                    )
                     .add(R.id.moviesContainer, VideoPlayerFragment())
                     .addToBackStack("movies")
                     .commit()
