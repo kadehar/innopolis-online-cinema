@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Онлайн Кинотеатр</string>
+    <string name="movieContentDescription">Постер</string>
+    <string name="watch_movie_button">Смотреть фильм</string>
+</resources>
